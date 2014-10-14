@@ -10,7 +10,7 @@ deploy:
   provider: npm
   email: sh19910711@gmail.com
   api_key:
-    secure: STmp0PxPqAudxd8o4mmH3pNDvs2YkoEveqhkQCQX12e14UMffD8RO5KgPrrL4tV82pNPoS9q8SXl6fzrDkBu57SplU31dWVXD8PaTACU6BPVqVNk3CERL9mad46U7jxmdQXW5UvnGQkomi5QAdrBOsa7f+jtwZ/M/heCjM+nhQw=
+    secure: IlXchs6UxxilK8jKLJIQh0rB87e1o6uuiNlsbczvQDBSqShZwfnCwo2iJuifPVC7CPPOgMU29oNFt0AEoo4r2at8fWbN5w9YMUfyYxgmNGlB5vsyg50a8ZTwh8hngDCEhwTn9Nr9Z6z5VWMg7TCAXUnVOIEODlBggNcjiLVv2Eo=
   on:
     tags: true
     repo: sh19910711/connect-amd-glob
