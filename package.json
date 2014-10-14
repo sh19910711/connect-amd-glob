@@ -1,0 +1,23 @@
+{
+  "name": "connect-amd-glob",
+  "version": "1.0.0",
+  "description": "Generate globbing classes for AMD (RequireJS)",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hiroyuki Sano <sh19910711 at gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^1.9.2",
+    "connect": "^3.2.0",
+    "gulp": "^3.8.8",
+    "gulp-mocha": "^1.1.1",
+    "jslint": "^0.6.4",
+    "supertest": "^0.14.0"
+  },
+  "dependencies": {
+    "coffee-script": "^1.8.0",
+    "lodash": "^2.4.1"
+  }
+}
