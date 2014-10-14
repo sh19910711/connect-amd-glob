@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+- '0.10'
+- '0.11'
+before_script:
+- npm install -g gulp
+script:
+- gulp
+deploy:
+  provider: npm
+  email: sh19910711@gmail.com
+  api_key:
+    secure: YN3kMvKduBdNwGI1Jr/BdXAcX+D4+PA/7okAbgHjc1CFdfiIa91afePM3BoBxY9+wsJRuzP4vZeR6BgH6++gTwU1co3zr+5Jmp2GHwAPx27H2sh25/EsCmp0KkkdN3n9TFflp1ge8QEaREmmE3HJlJ3I7uPzI3kRm0lebR4bjgg=
+  on:
+    tags: true
+    repo: sh19910711/connect-amd-glob
+    all_branches: true
