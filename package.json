@@ -4,7 +4,7 @@
   "description": "Generate globbing classes for AMD (RequireJS)",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "author": "Hiroyuki Sano <sh19910711 at gmail.com>",
   "license": "MIT",
