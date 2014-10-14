@@ -1,6 +1,6 @@
 {
   "name": "connect-amd-glob",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generate globbing classes for AMD (RequireJS)",
   "main": "lib/index.js",
   "scripts": {
