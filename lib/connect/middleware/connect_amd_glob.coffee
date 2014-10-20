@@ -28,14 +28,33 @@ class ConnectAmdGlob
     _(@options.assetPaths).each (assetPath)=>
       @env.appendPath assetPath
 
-  startWithBaseUrl: (url)->
+  startWithBaseUrl: (url_str)->
     regexp = new RegExp("^#{@options.baseUrl}")
-    regexp.test url
+    regexp.test url_str
 
-  hasGlob: (url)->
-    /\*/.test url
+  hasGlob: (url_str)->
+    /\*/.test url_str
 
-  isMatchURL: (url)->
+  existsFile: (file_path)->
+    extname = path.extname(file_path)
+    no_ext_path = file_path.slice(0, -1 * extname.length)
+    _([".js", ".coffee"]).find (find_ext)->
+      fs.existsSync "#{no_ext_path}#{find_ext}"
+
+  getFilePath: (url_str)->
+    return undefined if @hasGlob(url_str)
+    url_obj = url.parse(url_str)
+    path_str = url_obj.pathname
+    found_asset_path = _(@options.assetPaths).find (asset_path)=>
+      real_path = @getRealPath(asset_path, path_str)
+      @existsFile(real_path)
+    if found_asset_path
+      real_path = @getRealPath(found_asset_path, path_str)
+      no_ext = real_path.slice 0, -1 * path.extname(real_path).length
+      return no_ext + @existsFile(real_path)
+    return undefined
+
+  isGlobbingURL: (url)->
     return false unless @startWithBaseUrl(url)
     return false unless @hasGlob(url)
     return true
@@ -46,12 +65,12 @@ class ConnectAmdGlob
   capitalize: (name)->
     name.charAt(0).toUpperCase() + name.slice(1)
 
-  getModulePaths: (files)->
+  getModulePaths: (parent, files)->
     paths = []
     module_paths = files
       .map @removeFileExtension
       .map (filename)->
-        "'./#{filename}'"
+        "'./#{parent}/#{filename}'"
     module_paths
 
   getModuleClassNames: (files)->
@@ -87,7 +106,7 @@ class ConnectAmdGlob
 
       # module paths
       '['
-      @getModulePaths(files).join(",")
+      @getModulePaths(parent, files).join(",")
       '],'
 
       # module classes
@@ -133,7 +152,11 @@ class ConnectAmdGlob
     path.basename(path.dirname(target_path_without_base))
 
   entry: (req, res, next)->
-    if @isMatchURL(req.url)
+    file_path = @getFilePath(req.url)
+    if file_path
+      src = @env.findAsset(req.url.slice(1)).__source__
+      res.end src
+    else if @isGlobbingURL(req.url)
       dir_path = @findDirectory(req.url)
       return next() unless dir_path
       target_files = @getFiles(dir_path)
