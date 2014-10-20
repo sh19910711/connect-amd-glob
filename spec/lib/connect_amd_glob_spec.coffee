@@ -18,7 +18,12 @@ describe "ConnectAmdGlob", ->
     context "use connect_amd_glob", ->
 
       before ->
-        @app.use connect_amd_glob()
+        @app.use connect_amd_glob(
+          baseUrl: "/amd_glob"
+          assetPaths: [
+            "spec/fixtures/assets/coffee"
+          ]
+        )
 
       context "run http server", ->
 
@@ -28,20 +33,20 @@ describe "ConnectAmdGlob", ->
         after ->
           @server.close()
 
-        context "GET /hello", ->
+        context "GET /amd_glob", ->
 
           beforeEach ->
             @req = request(@server)
-              .get "/hello"
+              .get "/amd_glob"
 
           it "is 404", (done)->
             @req.expect 404, done
 
-        context "GET /hello/*.js", ->
+        context "GET /amd_glob/*.js", ->
 
           beforeEach ->
             @req = request(@server)
-              .get "/hello/*.js"
+              .get "/amd_glob/*.js"
 
           it "is 200", (done)->
             @req.expect 200, done
