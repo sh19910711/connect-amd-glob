@@ -157,6 +157,7 @@ class ConnectAmdGlob
     path.basename(path.dirname(target_path_without_base))
 
   entry: (req, res, next)->
+    console.log req.url
     file_path = @getFilePath(req.url)
     if file_path
       src = @env.findAsset(req.url.slice(1)).__source__

@@ -1,1 +1,5 @@
-console.log "Hello, World"
+define [], ->
+  class Hello
+    say: ->
+      console.log "Hello"
+

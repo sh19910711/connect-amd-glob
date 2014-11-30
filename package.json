@@ -9,13 +9,17 @@
   "author": "Hiroyuki Sano <sh19910711 at gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "amd-optimize": "^0.3.1",
     "chai": "^1.9.2",
     "concat": "^1.0.0",
     "connect": "^3.2.0",
     "gulp": "^3.8.8",
-    "gulp-amd-optimizer": "^0.1.0",
+    "gulp-amd-optimizer": "^0.3.0",
+    "gulp-coffee": "^2.2.0",
     "gulp-concat": "^2.4.1",
+    "gulp-debug": "^1.0.1",
     "gulp-mocha": "^1.1.1",
+    "gulp-remote-src": "^0.3.0",
     "jslint": "^0.6.4",
     "supertest": "^0.14.0"
   },

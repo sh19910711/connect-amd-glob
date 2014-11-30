@@ -1,7 +1,4 @@
-define(
-  [
-  ]
-  (
-  )->
-    console.log "sub hello 2"
-)
+define [], ->
+  class SubHello2
+    say: ->
+      console.log "sub hello 2"
