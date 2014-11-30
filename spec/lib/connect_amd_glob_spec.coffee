@@ -54,15 +54,15 @@ describe "ConnectAmdGlob", ->
           it "returns a valid script", (done)->
             @req
               .expect (req)->
-                ls = new jslint.LintStream(
+                linter = new jslint.LintStream(
                   sloppy: true
                   empty_block: true
                   white: true
                 )
-                ls.on "data", (chunk, enc, next)->
+                linter.on "data", (chunk, enc, next)->
                   # console.log chunk.linted
                   expect(chunk.linted.ok).to.be.ok
-                ls.write(
+                linter.write(
                   file: "hello"
                   body: "function define() { return 'define'; } #{req.text}"
                 )

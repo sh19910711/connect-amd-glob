@@ -43,24 +43,29 @@ class ConnectAmdGlob
 
   getFilePath: (url_str)->
     return undefined if @hasGlob(url_str)
+
     url_obj = url.parse(url_str)
     path_str = url_obj.pathname
+
     found_asset_path = _(@options.assetPaths).find (asset_path)=>
       real_path = @getRealPath(asset_path, path_str)
       @existsFile(real_path)
+
     if found_asset_path
       real_path = @getRealPath(found_asset_path, path_str)
       no_ext = real_path.slice 0, -1 * path.extname(real_path).length
       return no_ext + @existsFile(real_path)
+
     return undefined
 
   isGlobbingURL: (url)->
-    return false unless @startWithBaseUrl(url)
-    return false unless @hasGlob(url)
-    return true
+    @startWithBaseUrl(url) && @hasGlob(url)
 
   removeFileExtension: (name)->
-    name.slice(0, -1 * path.extname(name).length)
+    if /\./.test(name)
+      name.slice(0, -1 * path.extname(name).length)
+    else
+      name
 
   capitalize: (name)->
     name.charAt(0).toUpperCase() + name.slice(1)
