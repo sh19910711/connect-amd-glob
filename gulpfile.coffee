@@ -4,7 +4,7 @@ mocha   = require "gulp-mocha"
 concat  = require "gulp-concat"
 coffee  = require "gulp-coffee"
 remoteSrc     = require "gulp-remote-src"
-amdOptimizer  = require "gulp-amd-optimizer"
+amdOptimize   = require "amd-optimize"
 
 gulp.task "test", ->
   gulp.src ["spec/**/*_spec.coffee"]
@@ -32,13 +32,16 @@ gulp.task "server", (cb)->
   return undefined
 
 gulp.task "app.js", ->
-  remoteSrc ["app.js"], {base: "http://localhost:19292/"}
-    .pipe debug(verbose: true)
-    .pipe amdOptimizer(
-      "app"
+  amdOptimize
+    .src(
+      ["app.js"]
       {
-        configFile: gulp.src("spec/requirejs_config.coffee").pipe(coffee())
+        baseUrl: "http://localhost:19292"
       }
+    )
+    .pipe debug(verbose: true)
+    .pipe amdOptimize(
+      "app"
     )
     .pipe concat("app.js")
     .pipe gulp.dest("tmp/")
